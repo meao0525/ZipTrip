@@ -4,10 +4,10 @@ let markers = []; // マーカーを管理する配列
 
 // 初期化
 function initMap() {
-  map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 5,
-    center: { lat: 35.68, lng: 139.76 }, // 東京
-  });
+  // map = new google.maps.Map(document.getElementById("map"), {
+  //   zoom: 5,
+  //   center: { lat: 35.68, lng: 139.76 }, // 東京
+  // });
 
   // 郵便番号リストを取得
   fetch("data/postcodes.json")
@@ -39,7 +39,7 @@ function startRandom() {
   }
 
   // 前のマーカーとズームをリセット
-  clearMarkers();
+  // clearMarkers();
 
   // まず候補からランダムに1つ選ぶ
   const target = postcodes[Math.floor(Math.random() * postcodes.length)];
@@ -63,7 +63,12 @@ function startRandom() {
 
       if (i === 6) { // 最後の桁が止まったら確定
         const formatted = target.zip.slice(0, 3) + "-" + target.zip.slice(3);
-        showOnMap(formatted, target);
+        // ページにも住所を表示
+        document.getElementById("address").textContent =
+          `${target.pref}${target.city}${target.town}`;
+        document.getElementById("addressKana").textContent =
+          `${target.prefKana} ${target.cityKana} ${target.townKana}`;
+        // showOnMap(formatted, target);
       }
     }, 1000 + i * 500);
   });
@@ -114,12 +119,6 @@ function showOnMap(zip, target) {
       `;
       const info = new google.maps.InfoWindow({ content });
       marker.addListener("click", () => info.open(map, marker));
-
-      // ページにも住所を表示
-      document.getElementById("address").textContent =
-        `${target.pref}${target.city}${target.town}`;
-      document.getElementById("addressKana").textContent =
-        `${target.prefKana} ${target.cityKana} ${target.townKana}`;
 
     } else {
       alert("この郵便番号は見つかりませんでした: " + zip);
