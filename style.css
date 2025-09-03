@@ -1,41 +1,96 @@
 body {
-  font-family: "Arial", sans-serif;
+  font-family: "Arial", "Hiragino Kaku Gothic ProN", sans-serif;
   text-align: center;
   margin: 0;
   padding: 0;
+  background: linear-gradient(135deg, #ffffff, #d0f0ff, #87ceeb);
+  background-repeat: no-repeat;   /* 繰り返し防止 */
+  background-attachment: fixed;   /* スクロールしても固定 */
+  background-size: cover;         /* 画面全体をカバー */
+  color: #2c3e50;
 }
+
 
 h1 {
   margin: 20px 0;
+  font-size: 2.2em;
+  color: #1a3d6d; /* 少し濃いめの青 */
+  text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.8);
 }
 
 #zip {
-  font-size: 2em;
+  font-size: 2.2em;
   margin: 20px;
   letter-spacing: 0.2em;
+  color: #e74c3c; /* 赤で強調はそのまま */
+  font-weight: bold;
 }
 
 #address {
-  font-size: 1.2em;
+  font-size: 1.3em;
   margin: 10px 0;
-  color: #333;
+  color: #1a3d6d;
 }
 
 #addressKana {
   font-size: 1em;
   margin: 5px 0 15px;
-  color: #666;
+  color: #555;
 }
 
 button {
   font-size: 1.2em;
-  padding: 10px 20px;
-  border-radius: 8px;
+  padding: 12px 24px;
+  border-radius: 30px;
   cursor: pointer;
+  background: linear-gradient(135deg, #6dd5fa, #2980b9); /* 空色グラデーション */
+  border: none;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
 
 #map {
   width: 100%;
   height: 500px;
   margin-top: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* スマホ向け（幅600px以下） */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.6em;
+    margin: 15px 0;
+  }
+
+  #zip {
+    font-size: 1.6em;
+    margin: 15px;
+  }
+
+  #address {
+    font-size: 1.1em;
+  }
+
+  #addressKana {
+    font-size: 0.9em;
+  }
+
+  button {
+    font-size: 1em;
+    padding: 10px 20px;
+  }
+
+  #map {
+    height: 300px;
+  }
 }
