@@ -1,5 +1,8 @@
 name: Update Postcodes
 
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron: "0 0 1 * *" # 毎月1日に実行 (UTC基準)
@@ -12,6 +15,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          persist-credentials: true
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -29,5 +35,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/postcodes.json
-          git commit -m "chore: update postcodes.json [skip ci]" || echo "No changes"
+          # ステージに変更が無ければ終了（node_modules 等の未管理ファイルによる失敗回避）
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "chore: update postcodes.json [skip ci]"
           git push
