@@ -20,16 +20,16 @@ function initMap() {
 
 function clearMarkers() {
   // 既存マーカーを消す
-  markers.forEach(m => m.setMap(null));
-  markers = [];
+  // markers.forEach(m => m.setMap(null));
+  // markers = [];
 
   // 表示リセット
   document.getElementById("address").textContent = "";
   document.getElementById("addressKana").textContent = "";
 
   // ズームとセンターをリセット
-  map.setZoom(5);
-  map.setCenter({ lat: 35.68, lng: 139.76 }); // 東京
+  // map.setZoom(5);
+  // map.setCenter({ lat: 35.68, lng: 139.76 }); // 東京
 }
 
 function startRandom() {
@@ -39,7 +39,7 @@ function startRandom() {
   }
 
   // 前のマーカーとズームをリセット
-  // clearMarkers();
+  clearMarkers();
 
   // まず候補からランダムに1つ選ぶ
   const target = postcodes[Math.floor(Math.random() * postcodes.length)];
@@ -68,6 +68,14 @@ function startRandom() {
           `${target.pref}${target.city}${target.town}`;
         document.getElementById("addressKana").textContent =
           `${target.prefKana} ${target.cityKana} ${target.townKana}`;
+
+        // Googleマップリンクを生成
+        const mapUrl =
+          `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("日本 " + formatted + " " + target.pref + target.city + target.town)}`;
+        document.getElementById("mapLink").innerHTML =
+          `<a href="${mapUrl}" target="_blank"><button>Googleマップで表示</button></a>`;
+
+        // 埋め込みマップに表示
         // showOnMap(formatted, target);
       }
     }, 1000 + i * 500);
