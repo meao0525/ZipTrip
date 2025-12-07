@@ -18,6 +18,44 @@ h1 {
   text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.8);
 }
 
+#prefTab {
+  width: 90%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 12px;
+  background: linear-gradient(135deg, #6dd5fa, #2980b9);
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  user-select: none;
+  margin-top: 40px;
+}
+
+#prefContainer.hidden {
+  display: none;
+}
+
+#prefContainer {
+  width: 90%;
+  max-width: 700px;
+  margin: 0 auto 20px;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 15px;
+  border-radius: 12px;
+}
+
+#prefList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 6px;
+  text-align: left;
+}
+
+#prefList label {
+  font-size: 0.9em;
+}
+
 #zip {
   font-size: 2.2em;
   margin: 20px;
@@ -93,5 +131,23 @@ button:hover {
 
   #map {
     height: 300px;
+  }
+
+  #prefTab {
+    font-size: 0.9em;
+    padding: 10px;
+  }
+
+  #prefContainer {
+    padding: 10px;
+  }
+
+  #prefList {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 4px;
+  }
+
+  #prefList label {
+    font-size: 0.85em;
   }
 }
